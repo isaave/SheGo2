@@ -36,8 +36,10 @@ struct LoginView: View {
                         VStack(alignment: .leading) {
                             Text("Usuário")
                                 .foregroundColor(.white)
+                                
                             
                             TextField("Digite seu email ou telefone", text: $usuario)
+                                .foregroundColor(Color("card and navbar color"))
                                 .padding()
                                 .background(Color.white.opacity(0.95))
                                 .cornerRadius(10)
@@ -56,6 +58,7 @@ struct LoginView: View {
                         Button("Entrar") {
                             print("Login clicado")
                         }
+                        .font(.system(size: 18, weight: .bold))
                         .frame(width: 167, height: 47)
                         .background(Color("btn color"))
                         .foregroundColor(Color("txt color"))
