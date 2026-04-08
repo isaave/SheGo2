@@ -39,7 +39,6 @@
 				EscolhaUsuarioView.swift,
 				"fonts/Karla-ExtraBold.ttf",
 				HomepageView.swift,
-				info.plist,
 				LoginView.swift,
 				SheGoApp.swift,
 			);
@@ -53,7 +52,6 @@
 				ContentView.swift,
 				EscolhaUsuarioView.swift,
 				HomepageView.swift,
-				info.plist,
 				LoginView.swift,
 				SheGoApp.swift,
 			);
