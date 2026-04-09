@@ -2,10 +2,6 @@ import SwiftUI
 
 struct CadastroView: View {
     
-    let corFundo = Color(red: 0.93, green: 0.80, blue: 0.70)
-    let corCard = Color(red: 0.70, green: 0.0, blue: 0.30)
-    let corBotao = Color(red: 1.0, green: 0.4, blue: 0.5)
-    
     @State private var nome = ""
     @State private var telefone = ""
     @State private var email = ""
@@ -15,7 +11,7 @@ struct CadastroView: View {
     var body: some View {
         ZStack {
             
-            corFundo
+            Color("background color")
                 .ignoresSafeArea()
             
             VStack {
@@ -24,14 +20,13 @@ struct CadastroView: View {
                 
                 Text("Cadastro")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(corCard)
+                    .foregroundColor(Color("card and navbar color"))
                 
                 VStack(spacing: 15) {
                     
                     campo("Nome", "Digite seu nome completo", $nome)
                     campo("Telefone", "(DDD) 99 9999-9999", $telefone)
                     campo("Email", "Digite seu email", $email)
-                    
                     campoSenha("Senha", "Digite sua senha", $senha)
                     campoSenha("Confirme sua senha", "Confirme sua senha", $confirmarSenha)
                     
@@ -40,14 +35,14 @@ struct CadastroView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                             .frame(width: 140, height: 45)
-                            .background(corBotao)
+                            .background(Color("btn color"))
                             .cornerRadius(12)
                     }
                     .buttonStyle(.plain)
                     .padding(.top, 10)
                 }
                 .padding(20)
-                .background(corCard)
+                .background(Color("card and navbar color"))
                 .cornerRadius(25)
                 .padding(.horizontal, 30)
                 
@@ -56,32 +51,55 @@ struct CadastroView: View {
         }
     }
     
+
     func campo(_ titulo: String, _ placeholder: String, _ binding: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 5) {
+            
             Text(titulo)
+                .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.white)
                 .font(.caption)
             
-            TextField(placeholder, text: binding)
-                .padding()
-                .background(Color.white.opacity(0.9))
-                .cornerRadius(10)
+            TextField(
+                "",
+                text: binding,
+                prompt: Text(placeholder)
+                    .foregroundColor(Color("Cor placeholder"))
+            )
+            .padding()
+            .background(Color("Cor Label"))
+            .cornerRadius(10)
+            .font(.system(size: 16))
+            .foregroundColor(.white)
         }
     }
     
+    // 🔥 CAMPO SENHA
     func campoSenha(_ titulo: String, _ placeholder: String, _ binding: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 5) {
+            
             Text(titulo)
+                .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.white)
                 .font(.caption)
             
-            SecureField(placeholder, text: binding)
-                .padding()
-                .background(Color.white.opacity(0.9))
-                .cornerRadius(10)
+            SecureField(
+                "",
+                text: binding,
+                prompt: Text(placeholder)
+                    .foregroundColor(Color("Cor placeholder"))
+            )
+            .padding()
+            .background(Color("Cor Label"))
+            .cornerRadius(10)
+            .font(.system(size: 16))
+            .foregroundColor(.white)
         }
     }
 }
+
 #Preview {
-    CadastroView()
+    NavigationStack {
+        CadastroView()
+    }
 }

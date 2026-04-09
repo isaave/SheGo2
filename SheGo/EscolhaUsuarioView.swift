@@ -15,7 +15,7 @@ struct EscolhaUsuarioView: View {
                 Image("Logo bem-vinda")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 180)
+                    .frame(width: 220)
                 
                 Text("Como você pretende\nusar nosso aplicativo?")
                     .multilineTextAlignment(.center)
@@ -38,10 +38,13 @@ struct EscolhaUsuarioView: View {
     }
     
     func botao(_ texto: String, _ icone: String) -> some View {
-        HStack {
+        HStack(spacing: 12) {
+            
             Image(systemName: icone)
+                .font(.system(size: 35)) // 👈 ÍCONE MAIOR
+            
             Text(texto)
-                .fontWeight(.semibold)
+                .font(.system(size: 26, weight: .semibold)) // 👈 TEXTO MAIOR
         }
         .foregroundColor(Color("txt color"))
         .frame(width: 221, height: 68)
@@ -49,6 +52,9 @@ struct EscolhaUsuarioView: View {
         .cornerRadius(12)
     }
 }
+
 #Preview {
-    EscolhaUsuarioView()
+    NavigationStack {
+        EscolhaUsuarioView()
+    }
 }

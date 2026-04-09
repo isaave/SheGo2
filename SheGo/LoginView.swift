@@ -66,9 +66,7 @@ struct LoginView: View {
                             .cornerRadius(10)
                         }
                         
-                        Button(action: {
-                            print("Login clicado")
-                        }) {
+                        NavigationLink(destination: HomepageView()) {
                             Text("Entrar")
                                 .font(.system(size: 18, weight: .bold))
                                 .frame(width: 167, height: 47)
@@ -76,6 +74,7 @@ struct LoginView: View {
                                 .foregroundColor(Color("txt color"))
                                 .cornerRadius(12)
                         }
+                        .buttonStyle(.plain)
                         
                         VStack(spacing: 4) {
                             Text("Não tem conta?")
