@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var irParaLogin = false
+    @State private var irParaEscolhaUsuario = false
     
     var body: some View {
         NavigationStack {
@@ -23,15 +23,12 @@ struct ContentView: View {
                     Spacer()
                 }
             }
-            
-            .navigationDestination(isPresented: $irParaLogin) {
-                LoginView()
+            .navigationDestination(isPresented: $irParaEscolhaUsuario) {
+                EscolhaUsuarioView()
             }
-            
-        
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    irParaLogin = true
+                    irParaEscolhaUsuario = true
                 }
             }
         }
