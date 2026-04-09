@@ -12,7 +12,7 @@ struct EscolhaUsuarioView: View {
                 
                 Spacer()
                 
-                Image("logo com bem-vinda")
+                Image("Logo bem-vinda")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 180)

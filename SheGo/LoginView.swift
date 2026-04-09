@@ -26,48 +26,60 @@ struct LoginView: View {
                 VStack {
                     Spacer()
                     
-                    // 🔻 CARD
                     VStack(spacing: 20) {
                         
                         Text("Login")
-                            .font(.system(size: 32, weight: .bold))
+                            .font(.custom("Karla-Bold", size: 32))
                             .foregroundColor(.white)
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 8) {
                             Text("Usuário")
                                 .foregroundColor(.white)
-                                
+                                .font(.system(size: 16, weight: .semibold))
                             
-                            TextField("Digite seu email ou telefone", text: $usuario)
-                                .foregroundColor(Color("card and navbar color"))
-                                .padding()
-                                .background(Color.white.opacity(0.95))
-                                .cornerRadius(10)
+                            TextField(
+                                "",
+                                text: $usuario,
+                                prompt: Text("Digite seu email ou telefone")
+                                    .foregroundColor(Color("Cor placeholder"))
+                            )
+                            .padding()
+                            .background(Color("Cor Label"))
+                            .cornerRadius(10)
+                            .autocapitalization(.none)
+                            .keyboardType(.emailAddress)
                         }
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 8) {
                             Text("Senha")
                                 .foregroundColor(.white)
+                                .font(.system(size: 16, weight: .semibold))
                             
-                            SecureField("Digite sua senha", text: $senha)
-                                .padding()
-                                .background(Color.white.opacity(0.95))
-                                .cornerRadius(10)
+                            SecureField(
+                                "",
+                                text: $senha,
+                                prompt: Text("Digite sua senha")
+                                    .foregroundColor(Color("Cor placeholder"))
+                            )
+                            .padding()
+                            .background(Color("Cor Label"))
+                            .cornerRadius(10)
                         }
                         
-                        Button("Entrar") {
+                        Button(action: {
                             print("Login clicado")
+                        }) {
+                            Text("Entrar")
+                                .font(.system(size: 18, weight: .bold))
+                                .frame(width: 167, height: 47)
+                                .background(Color("btn color"))
+                                .foregroundColor(Color("txt color"))
+                                .cornerRadius(12)
                         }
-                        .font(.system(size: 18, weight: .bold))
-                        .frame(width: 167, height: 47)
-                        .background(Color("btn color"))
-                        .foregroundColor(Color("txt color"))
-                        .cornerRadius(12)
                         
-                        // 🔗 LINK CADASTRO
-                        VStack {
+                        VStack(spacing: 4) {
                             Text("Não tem conta?")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("txt color"))
                             
                             NavigationLink(destination: CadastroView()) {
                                 Text("Cadastre-se")
@@ -79,12 +91,10 @@ struct LoginView: View {
                     }
                     .padding(24)
                     .frame(maxWidth: .infinity)
-                    .frame(height: geo.size.height * 0.6)
                     .background(Color("card and navbar color"))
                     .cornerRadius(30)
                 }
-                .ignoresSafeArea(edges: .bottom)
-            }
+                .ignoresSafeArea(edges: .bottom)            }
         }
     }
 }
