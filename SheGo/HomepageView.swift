@@ -93,8 +93,8 @@ struct HomepageView: View {
             
           
             .navigationDestination(isPresented: $irParaBusca) {
-                BuscandoMotoristaView()
-                    .navigationBarBackButtonHidden(true)
+                //BuscandoMotoristaView()
+                    //.navigationBarBackButtonHidden(true)
             }
         }
     }
