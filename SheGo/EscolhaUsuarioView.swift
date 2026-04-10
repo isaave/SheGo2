@@ -30,6 +30,7 @@ struct EscolhaUsuarioView: View {
                     
                     botao("Motorista", "car")
                 }
+                .padding(.top, 10)
                 
                 Spacer()
             }
