@@ -25,7 +25,9 @@ struct ContentView: View {
             }
             .navigationDestination(isPresented: $irParaEscolhaUsuario) {
                 EscolhaUsuarioView()
+                    .navigationBarBackButtonHidden(true)
             }
+    
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     irParaEscolhaUsuario = true
