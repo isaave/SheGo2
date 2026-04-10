@@ -7,6 +7,8 @@ struct CadastroView: View {
     @State private var email = ""
     @State private var senha = ""
     @State private var confirmarSenha = ""
+    @State private var mostrarSenha = false
+    @State private var mostrarConfirmarSenha = false
     
     var body: some View {
         ZStack {
@@ -28,14 +30,13 @@ struct CadastroView: View {
                     campo("Telefone", "(DDD) 99 9999-9999", $telefone)
                     campo("Email", "Digite seu email", $email)
                     
-                    campoSenha("Senha", "Digite sua senha", $senha)
-                    campoSenha("Confirme sua senha", "Confirme sua senha", $confirmarSenha)
+                    campoSenha("Senha", "Digite sua senha", $senha, $mostrarSenha)
+                    campoSenha("Confirme sua senha", "Confirme sua senha", $confirmarSenha, $mostrarConfirmarSenha)
                     
-                   
                     NavigationLink(destination: HomepageView()) {
                         Text("Cadastrar")
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("txt color"))
                             .frame(width: 140, height: 45)
                             .background(Color("btn color"))
                             .cornerRadius(12)
@@ -53,14 +54,12 @@ struct CadastroView: View {
         }
     }
     
-
     func campo(_ titulo: String, _ placeholder: String, _ binding: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             
             Text(titulo)
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.white)
-                .font(.caption)
             
             TextField(
                 "",
@@ -72,30 +71,50 @@ struct CadastroView: View {
             .background(Color("Cor Label"))
             .cornerRadius(10)
             .font(.system(size: 16))
-            .foregroundColor(.white)
+            .foregroundColor(Color("Cor placeholder"))
         }
     }
     
-    // 🔥 CAMPO SENHA
-    func campoSenha(_ titulo: String, _ placeholder: String, _ binding: Binding<String>) -> some View {
+    func campoSenha(_ titulo: String, _ placeholder: String, _ binding: Binding<String>, _ mostrar: Binding<Bool>) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             
             Text(titulo)
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.white)
-                .font(.caption)
             
-            SecureField(
-                "",
-                text: binding,
-                prompt: Text(placeholder)
+            HStack {
+                
+                if mostrar.wrappedValue {
+                    TextField(
+                        "",
+                        text: binding,
+                        prompt: Text(placeholder)
+                            .foregroundColor(Color("Cor placeholder"))
+                    )
                     .foregroundColor(Color("Cor placeholder"))
-            )
+                    .font(.system(size: 16))
+                } else {
+                    SecureField(
+                        "",
+                        text: binding,
+                        prompt: Text(placeholder)
+                            .foregroundColor(Color("Cor placeholder"))
+                    )
+                    .foregroundColor(Color("Cor placeholder"))
+                    .font(.system(size: 16))
+                }
+                
+                Button(action: {
+                    mostrar.wrappedValue.toggle()
+                }) {
+                    Image(systemName: mostrar.wrappedValue ? "eye.slash" : "eye")
+                        .foregroundColor(Color("Cor placeholder"))
+                        .font(.system(size: 18))
+                }
+            }
             .padding()
             .background(Color("Cor Label"))
             .cornerRadius(10)
-            .font(.system(size: 16))
-            .foregroundColor(.white)
         }
     }
 }

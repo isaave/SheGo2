@@ -5,19 +5,17 @@ struct HomepageView: View {
     
     @State private var origem = ""
     @State private var destino = ""
-    
-    @State private var irParaBusca = false // 👈 NOVO
+    @State private var usarLocalizacao = false
     
     @State private var cameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: -23.5505, longitude: -46.6333),
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            center: CLLocationCoordinate2D(latitude: -23.6336, longitude: -46.6992),
+            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         )
     )
     
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 
                 Color("background color")
@@ -25,108 +23,146 @@ struct HomepageView: View {
                 
                 VStack(spacing: 0) {
                     
-                    ScrollView {
-                        VStack(spacing: 15) {
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 16) {
                             
                             Image("logo sem nada")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 120)
-                                .padding(.top, 20)
+                                .padding(.top, 28)
                             
                             Text("Para onde você quer ir?")
-                                .font(.headline)
+                                .font(.custom("Karla-Bold", size: 18))
                                 .foregroundColor(Color("card and navbar color"))
                             
-                            VStack(spacing: 10) {
-                                campo("Seu local", $origem)
-                                campo("Destino", $destino)
+                            VStack(spacing: 12) {
+                                campoComIcones("Seu local", $origem, true)
+                                campoComIcones("Destino", $destino, false)
                             }
                             
-                            HStack {
-                                Image(systemName: "location")
-                                Text("Usar minha localização atual")
+                            Button {
+                                usarLocalizacao.toggle()
+                            } label: {
+                                HStack(spacing: 8) {
+                                    Image(systemName: usarLocalizacao ? "checkmark.square.fill" : "square")
+                                        .font(.system(size: 18))
+                                    
+                                    Text("Usar minha localização atual")
+                                        .font(.custom("Karla-Regular", size: 16))
+                                }
                             }
                             .foregroundColor(Color("card and navbar color"))
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .buttonStyle(.plain)
                             
                             VStack(alignment: .leading, spacing: 10) {
                                 Text("Viagens anteriores")
-                                    .font(.headline)
+                                    .font(.custom("Karla-Bold", size: 16))
+                                    .foregroundColor(Color("card and navbar color"))
                                 
                                 historico("Estação Jurubatuba")
                                 historico("Shopping Sp Market")
                                 historico("Mc Donald's Nações Unidas")
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Map(position: $cameraPosition)
-                                .frame(height: 200)
-                                .cornerRadius(15)
+                                .frame(height: 245)
+                                .clipShape(RoundedRectangle(cornerRadius: 18))
                             
-                            // 🔥 BOTÃO AGORA NAVEGA
-                            Button("Buscar motorista") {
-                                irParaBusca = true
+                            NavigationLink(destination: BuscandoMotoristaView()) {
+                                Text("Buscar motorista")
+                                    .font(.custom("Karla-Bold", size: 18))
+                                    .foregroundColor(Color("txt color"))
+                                    .frame(width: 210, height: 50)
+                                    .background(Color("btn color"))
+                                    .cornerRadius(14)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color("btn color"))
-                            .foregroundColor(Color("txt color"))
-                            .cornerRadius(12)
+                            .buttonStyle(.plain)
+                            .padding(.top, 4)
+                            .padding(.bottom, 20)
                         }
-                        .padding()
+                        .padding(.horizontal, 28)
                     }
                     
-                    // NAVBAR
                     HStack {
                         navItem("car.fill", "Home")
-                        navItem("clock.fill", "Histórico")
+                        navItem("clock.arrow.circlepath", "Histórico")
                         navItem("wallet.pass.fill", "Carteira")
-                        navItem("person.fill", "Perfil")
+                        navItem("person", "Perfil")
                     }
-                    .padding(.vertical, 6)
-                    .padding(.horizontal)
-                    .frame(height: 55)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 12)
                     .background(Color("card and navbar color"))
-                    .shadow(radius: 5)
+                    .cornerRadius(22)
+                    .padding(.horizontal, 18)
+                    .padding(.bottom, 6)
+                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                }
+            }
+        }
+    }
+    
+    func campoComIcones(_ placeholder: String, _ text: Binding<String>, _ topo: Bool) -> some View {
+        HStack(spacing: 12) {
+            VStack(spacing: 0) {
+                Circle()
+                    .fill(Color("card and navbar color"))
+                    .frame(width: 6, height: 6)
+                
+                Rectangle()
+                    .fill(Color("card and navbar color"))
+                    .frame(width: 1.5, height: 26)
+                
+                if !topo {
+                    Circle()
+                        .fill(Color("card and navbar color"))
+                        .frame(width: 6, height: 6)
                 }
             }
             
-          
-            .navigationDestination(isPresented: $irParaBusca) {
-                //BuscandoMotoristaView()
-                    //.navigationBarBackButtonHidden(true)
-            }
+            TextField(
+                "",
+                text: text,
+                prompt: Text(placeholder)
+                    .foregroundColor(Color("card and navbar color"))
+            )
+            .font(.custom("Karla-Regular", size: 17))
+            .foregroundColor(Color("card and navbar color"))
         }
-    }
-    
- 
-    func campo(_ placeholder: String, _ binding: Binding<String>) -> some View {
-        TextField(placeholder, text: binding)
-            .padding()
-            .background(Color.white.opacity(0.9))
-            .cornerRadius(10)
+        .padding(.horizontal, 14)
+        .frame(height: 56)
+        .background(Color("Cor Label"))
+        .cornerRadius(12)
     }
     
     func historico(_ texto: String) -> some View {
-        HStack {
+        HStack(spacing: 10) {
             Image(systemName: "clock")
+                .font(.system(size: 13))
+            
             Text(texto)
+                .font(.custom("Karla-Regular", size: 16))
         }
-        .padding(8)
-        .background(Color.white.opacity(0.6))
-        .cornerRadius(8)
+        .foregroundColor(Color("card and navbar color"))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 10)
+        .frame(height: 28)
+        .background(Color("Cor Label").opacity(0.9))
+        .cornerRadius(6)
     }
     
     func navItem(_ icon: String, _ texto: String) -> some View {
-        VStack(spacing: 2) {
+        VStack(spacing: 4) {
             Image(systemName: icon)
-                .font(.system(size: 16))
+                .font(.system(size: 24))
+            
             Text(texto)
-                .font(.system(size: 10))
+                .font(.custom("Karla-Regular", size: 12))
         }
-        .foregroundColor(.white)
+        .foregroundColor(Color("txt color"))
         .frame(maxWidth: .infinity)
-        .padding(.top, 2)
     }
 }
 

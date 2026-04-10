@@ -4,6 +4,7 @@ struct LoginView: View {
     
     @State private var usuario = ""
     @State private var senha = ""
+    @State private var mostrarSenha = false
     
     var body: some View {
         GeometryReader { geo in
@@ -48,6 +49,7 @@ struct LoginView: View {
                             .cornerRadius(10)
                             .autocapitalization(.none)
                             .keyboardType(.emailAddress)
+                            .foregroundColor(Color("Cor placeholder"))
                         }
                         
                         VStack(alignment: .leading, spacing: 8) {
@@ -55,15 +57,35 @@ struct LoginView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 16, weight: .semibold))
                             
-                            SecureField(
-                                "",
-                                text: $senha,
-                                prompt: Text("Digite sua senha")
-                                    .foregroundColor(Color("Cor placeholder"))
-                            )
+                            HStack {
+                                
+                                if mostrarSenha {
+                                    TextField(
+                                        "",
+                                        text: $senha,
+                                        prompt: Text("Digite sua senha")
+                                            .foregroundColor(Color("Cor placeholder"))
+                                    )
+                                } else {
+                                    SecureField(
+                                        "",
+                                        text: $senha,
+                                        prompt: Text("Digite sua senha")
+                                            .foregroundColor(Color("Cor placeholder"))
+                                    )
+                                }
+                                
+                                Button(action: {
+                                    mostrarSenha.toggle()
+                                }) {
+                                    Image(systemName: mostrarSenha ? "eye.slash" : "eye")
+                                        .foregroundColor(Color("card and navbar color"))
+                                }
+                            }
                             .padding()
                             .background(Color("Cor Label"))
                             .cornerRadius(10)
+                            .foregroundColor(Color("Cor placeholder"))
                         }
                         
                         NavigationLink(destination: HomepageView()) {
@@ -93,7 +115,8 @@ struct LoginView: View {
                     .background(Color("card and navbar color"))
                     .cornerRadius(30)
                 }
-                .ignoresSafeArea(edges: .bottom)            }
+            }
+            .ignoresSafeArea(edges: .bottom)
         }
     }
 }
