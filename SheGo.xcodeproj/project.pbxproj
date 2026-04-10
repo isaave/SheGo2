@@ -36,10 +36,12 @@
 				Assets.xcassets,
 				CadastroView.swift,
 				ContentView.swift,
+				EscolhaMotorista.swift,
 				EscolhaUsuarioView.swift,
 				"fonts/Karla-ExtraBold.ttf",
 				HomepageView.swift,
 				LoginView.swift,
+				PedirCorridaView.swift,
 				SheGoApp.swift,
 			);
 			target = 7671845A2F7EEBF6005B995B /* SheGo */;
@@ -50,9 +52,11 @@
 				Assets.xcassets,
 				CadastroView.swift,
 				ContentView.swift,
+				EscolhaMotorista.swift,
 				EscolhaUsuarioView.swift,
 				HomepageView.swift,
 				LoginView.swift,
+				PedirCorridaView.swift,
 				SheGoApp.swift,
 			);
 			target = 767184712F7EEBF7005B995B /* SheGoUITests */;
