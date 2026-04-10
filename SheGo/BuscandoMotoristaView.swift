@@ -28,9 +28,9 @@ struct BuscandoMotoristaView: View {
             }
             
            
-            .navigationDestination(isPresented: $irParaProxima) {
-                HomepageView()
-            }
+           // .navigationDestination(isPresented: $irParaProxima) {
+                //HomepageView()
+           // }
             
             
             .onAppear {
