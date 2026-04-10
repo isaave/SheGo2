@@ -27,9 +27,11 @@ struct CadastroView: View {
                     campo("Nome", "Digite seu nome completo", $nome)
                     campo("Telefone", "(DDD) 99 9999-9999", $telefone)
                     campo("Email", "Digite seu email", $email)
+                    
                     campoSenha("Senha", "Digite sua senha", $senha)
                     campoSenha("Confirme sua senha", "Confirme sua senha", $confirmarSenha)
                     
+                   
                     NavigationLink(destination: HomepageView()) {
                         Text("Cadastrar")
                             .fontWeight(.bold)
