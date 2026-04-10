@@ -15,92 +15,91 @@ struct HomepageView: View {
     )
     
     var body: some View {
-        ZStack {
-            
-            Color("background color")
-                .ignoresSafeArea()
-            
-            VStack(spacing: 0) {
+        NavigationStack {
+            ZStack {
                 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 16) {
-                        
-                        Image("logo sem nada")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 120)
-                            .padding(.top, 28)
-                        
-                        Text("Para onde você quer ir?")
-                            .font(.custom("Karla-Bold", size: 18))
-                            .foregroundColor(Color("card and navbar color"))
-                        
-                        VStack(spacing: 12) {
-                            campoComIcones("Seu local", $origem, true)
-                            campoComIcones("Destino", $destino, false)
-                        }
-                        
-                     
-                        Button {
-                            usarLocalizacao.toggle()
-                        } label: {
-                            HStack(spacing: 8) {
-                                Image(systemName: usarLocalizacao ? "checkmark.square.fill" : "square")
-                                    .font(.system(size: 18))
-                                
-                                Text("Usar minha localização atual")
-                                    .font(.custom("Karla-Regular", size: 16))
-                            }
-                        }
-                        .foregroundColor(Color("card and navbar color"))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .buttonStyle(.plain)
-                        
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Viagens anteriores")
-                                .font(.custom("Karla-Bold", size: 16))
+                Color("background color")
+                    .ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 16) {
+                            
+                            Image("logo sem nada")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 120)
+                                .padding(.top, 28)
+                            
+                            Text("Para onde você quer ir?")
+                                .font(.custom("Karla-Bold", size: 18))
                                 .foregroundColor(Color("card and navbar color"))
                             
-                            historico("Estação Jurubatuba")
-                            historico("Shopping Sp Market")
-                            historico("Mc Donald's Nações Unidas")
+                            VStack(spacing: 12) {
+                                campoComIcones("Seu local", $origem, true)
+                                campoComIcones("Destino", $destino, false)
+                            }
+                            
+                            Button {
+                                usarLocalizacao.toggle()
+                            } label: {
+                                HStack(spacing: 8) {
+                                    Image(systemName: usarLocalizacao ? "checkmark.square.fill" : "square")
+                                        .font(.system(size: 18))
+                                    
+                                    Text("Usar minha localização atual")
+                                        .font(.custom("Karla-Regular", size: 16))
+                                }
+                            }
+                            .foregroundColor(Color("card and navbar color"))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .buttonStyle(.plain)
+                            
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Viagens anteriores")
+                                    .font(.custom("Karla-Bold", size: 16))
+                                    .foregroundColor(Color("card and navbar color"))
+                                
+                                historico("Estação Jurubatuba")
+                                historico("Shopping Sp Market")
+                                historico("Mc Donald's Nações Unidas")
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Map(position: $cameraPosition)
+                                .frame(height: 245)
+                                .clipShape(RoundedRectangle(cornerRadius: 18))
+                            
+                            NavigationLink(destination: BuscandoMotoristaView()) {
+                                Text("Buscar motorista")
+                                    .font(.custom("Karla-Bold", size: 18))
+                                    .foregroundColor(Color("txt color"))
+                                    .frame(width: 210, height: 50)
+                                    .background(Color("btn color"))
+                                    .cornerRadius(14)
+                            }
+                            .buttonStyle(.plain)
+                            .padding(.top, 4)
+                            .padding(.bottom, 20)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Map(position: $cameraPosition)
-                            .frame(height: 245)
-                            .clipShape(RoundedRectangle(cornerRadius: 18))
-                        
-                        Button {
-                            print("Buscar motorista")
-                        } label: {
-                            Text("Buscar motorista")
-                                .font(.custom("Karla-Bold", size: 18))
-                                .foregroundColor(Color("txt color"))
-                                .frame(width: 210, height: 50)
-                                .background(Color("btn color"))
-                                .cornerRadius(14)
-                        }
-                        .padding(.top, 4)
-                        .padding(.bottom, 20)
+                        .padding(.horizontal, 28)
                     }
-                    .padding(.horizontal, 28)
+                    
+                    HStack {
+                        navItem("car.fill", "Home")
+                        navItem("clock.arrow.circlepath", "Histórico")
+                        navItem("wallet.pass.fill", "Carteira")
+                        navItem("person", "Perfil")
+                    }
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 12)
+                    .background(Color("card and navbar color"))
+                    .cornerRadius(22)
+                    .padding(.horizontal, 18)
+                    .padding(.bottom, 6)
+                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
                 }
-                
-            
-                HStack {
-                    navItem("car.fill", "Home")
-                    navItem("clock.arrow.circlepath", "Histórico")
-                    navItem("wallet.pass.fill", "Carteira")
-                    navItem("person", "Perfil")
-                }
-                .padding(.vertical, 12)
-                .padding(.horizontal, 12)
-                .background(Color("card and navbar color"))
-                .cornerRadius(22) // 👈 4 bordas arredondadas
-                .padding(.horizontal, 18)
-                .padding(.bottom, 6)
-                .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
             }
         }
     }

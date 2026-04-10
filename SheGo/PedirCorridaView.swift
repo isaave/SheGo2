@@ -8,15 +8,15 @@ struct PedirCorridaView: View {
 
     var body: some View {
         ZStack {
-            Map(position: .constant(
-                MapCameraPosition.region(
-                    MKCoordinateRegion(
-                        center: CLLocationCoordinate2D(latitude: -23.5505, longitude: -46.6333),
-                        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-                    )
-                )
-            ))
-            .ignoresSafeArea()
+          //  Map(position: .constant(
+          //      MapCameraPosition.region(
+          //          MKCoordinateRegion(
+             //           center: CLLocationCoordinate2D(latitude: -23.5505, longitude: -46.6333),
+            //            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                   // )
+             //  )
+          //  ))
+           // .ignoresSafeArea()
 
             LinearGradient(
                 gradient: Gradient(colors: [Color.black.opacity(0.25), Color(hex: "#6A0030").opacity(0.75)]),

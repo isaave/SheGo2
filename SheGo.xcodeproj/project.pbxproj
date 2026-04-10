@@ -30,10 +30,25 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7692292A2F89891000FC953E /* Exceptions for "SheGoTests" folder in "SheGo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SheGoApp.swift,
+			);
+			target = 7671845A2F7EEBF6005B995B /* SheGo */;
+		};
+		7692292B2F89891000FC953E /* Exceptions for "SheGoTests" folder in "SheGoTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SheGoApp.swift,
+			);
+			target = 767184672F7EEBF7005B995B /* SheGoTests */;
+		};
 		76B22F6B2F857C8D008172FE /* Exceptions for "SheGo" folder in "SheGo" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				BuscandoView.swift,
 				CadastroView.swift,
 				ContentView.swift,
 				EscolhaMotorista.swift,
@@ -42,7 +57,6 @@
 				HomepageView.swift,
 				LoginView.swift,
 				PedirCorridaView.swift,
-				SheGoApp.swift,
 			);
 			target = 7671845A2F7EEBF6005B995B /* SheGo */;
 		};
@@ -50,6 +64,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				BuscandoView.swift,
 				CadastroView.swift,
 				ContentView.swift,
 				EscolhaMotorista.swift,
@@ -57,7 +72,6 @@
 				HomepageView.swift,
 				LoginView.swift,
 				PedirCorridaView.swift,
-				SheGoApp.swift,
 			);
 			target = 767184712F7EEBF7005B995B /* SheGoUITests */;
 		};
@@ -66,6 +80,10 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7671846B2F7EEBF7005B995B /* SheGoTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7692292A2F89891000FC953E /* Exceptions for "SheGoTests" folder in "SheGo" target */,
+				7692292B2F89891000FC953E /* Exceptions for "SheGoTests" folder in "SheGoTests" target */,
+			);
 			path = SheGoTests;
 			sourceTree = "<group>";
 		};

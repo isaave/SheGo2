@@ -1,15 +1,15 @@
 import SwiftUI
 
+
 struct BuscandoMotoristaView: View {
     
-    @State private var irParaProxima = false
+    @State var irParaProxima = false
     
     var body: some View {
         NavigationStack {
             
             ZStack {
                 
-        
                 Color("background color")
                     .ignoresSafeArea()
                 
@@ -17,24 +17,23 @@ struct BuscandoMotoristaView: View {
                     
                     Spacer()
                     
-                  
                     Image("animation")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 220)
+                        .frame(width: 280)
                     
                     Spacer()
                 }
             }
             
-           
-           // .navigationDestination(isPresented: $irParaProxima) {
-                //HomepageView()
-           // }
+            .navigationDestination(isPresented: $irParaProxima) {
+                EscolhaMotorista()
+                    .navigationBarBackButtonHidden(true)
+            }
             
-            
+            // ⏱️ tempo
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     irParaProxima = true
                 }
             }
@@ -45,4 +44,3 @@ struct BuscandoMotoristaView: View {
 #Preview {
     BuscandoMotoristaView()
 }
-    
