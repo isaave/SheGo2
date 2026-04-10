@@ -34,8 +34,11 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				AvaliarCorridaView.swift,
 				CadastroView.swift,
+				ChatMotoristaView.swift,
 				ContentView.swift,
+				CorridaView.swift,
 				EscolhaMotorista.swift,
 				EscolhaUsuarioView.swift,
 				"fonts/Karla-ExtraBold.ttf",
@@ -50,8 +53,11 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				AvaliarCorridaView.swift,
 				CadastroView.swift,
+				ChatMotoristaView.swift,
 				ContentView.swift,
+				CorridaView.swift,
 				EscolhaMotorista.swift,
 				EscolhaUsuarioView.swift,
 				HomepageView.swift,

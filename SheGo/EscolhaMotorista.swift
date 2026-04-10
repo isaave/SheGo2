@@ -48,7 +48,7 @@ struct EscolhaMotorista: View {
                     routeRow(icon: "mappin.circle.fill", text: "Roldão Atacadista")
                 }
                 .padding()
-                .background(Color(hex: "#6A0030").opacity(0.55))
+                .background(Color(hex: "#A00049").opacity(0.55))
                 .cornerRadius(16)
                 .padding(.horizontal)
 
@@ -78,7 +78,7 @@ struct EscolhaMotorista: View {
             .padding(.bottom, 30)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.black.opacity(0.2), Color(hex: "#6A0030").opacity(0.75)]),
+                    gradient: Gradient(colors: [Color.black.opacity(0.2), Color(hex: "#A00049").opacity(0.75)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -109,7 +109,7 @@ struct EscolhaMotorista: View {
                     .font(.headline)
                 Text("Ver mais")
                     .font(.caption)
-                    .foregroundColor(Color(hex: "#6A0030"))
+                    .foregroundColor(Color(hex: "#A00049"))
             }
 
             Spacer()
@@ -118,12 +118,12 @@ struct EscolhaMotorista: View {
                 HStack {
                     ForEach(0..<5) { index in
                         Image(systemName: index < motorista.avaliacao ? "star.fill" : "star")
-                            .foregroundColor(Color(hex: "#6A0030"))
+                            .foregroundColor(Color(hex: "#A00049"))
                     }
                 }
                 Text(motorista.preco)
                     .font(.headline)
-                    .foregroundColor(Color(hex: "#6A0030"))
+                    .foregroundColor(Color(hex: "#A00049"))
             }
         }
         .padding()
