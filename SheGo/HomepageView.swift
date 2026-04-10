@@ -99,6 +99,7 @@ struct HomepageView: View {
         }
     }
     
+ 
     func campo(_ placeholder: String, _ binding: Binding<String>) -> some View {
         TextField(placeholder, text: binding)
             .padding()
