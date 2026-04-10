@@ -93,12 +93,13 @@ struct HomepageView: View {
             
           
             .navigationDestination(isPresented: $irParaBusca) {
-                BuscandoMotoristaView()
-                    .navigationBarBackButtonHidden(true)
+                //BuscandoMotoristaView()
+                    //.navigationBarBackButtonHidden(true)
             }
         }
     }
     
+ 
     func campo(_ placeholder: String, _ binding: Binding<String>) -> some View {
         TextField(placeholder, text: binding)
             .padding()
