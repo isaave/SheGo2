@@ -13,7 +13,7 @@ struct CorridaView: View {
 
             Image(systemName: "mappin.circle.fill")
                 .font(.system(size: 40))
-                .foregroundColor(Color(hex: "#F5627B"))
+          //      .foregroundColor(Color(hex: "#F5627B"))
                 .shadow(color: .black.opacity(0.4), radius: 9)
 
             VStack {
@@ -28,7 +28,7 @@ struct CorridaView: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 18)
                             .padding(.vertical, 10)
-                            .background(Color(hex: "#D91E36"))
+         //                   .background(Color(hex: "#D91E36"))
                             .clipShape(Capsule())
                             .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                     }

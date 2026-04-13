@@ -31,12 +31,11 @@ struct ChatMotoristaView: View {
                 Spacer()
             }
             .padding()
-            .background(Color(hex: "#6A0030"))
+            .background(Color("card and navbar"))
             .foregroundColor(.white)
 
             Divider()
 
-       
             ScrollView {
                 VStack(spacing: 10) {
                     ForEach(mensagens) { msg in
@@ -45,12 +44,12 @@ struct ChatMotoristaView: View {
 
                             Text(msg.texto)
                                 .padding(10)
-                                .background(!msg.isMotorista ? Color(hex: "#F5627B") : Color.gray.opacity(0.3))
+                                .background(!msg.isMotorista ? Color("btn color") : Color.gray.opacity(0.3))
                                 .foregroundColor(!msg.isMotorista ? .white : .black)
                                 .cornerRadius(15)
                                 .frame(maxWidth: 250, alignment: !msg.isMotorista ? .trailing : .leading)
 
-                            if !msg.isMotorista { Spacer() }
+                            if msg.isMotorista { Spacer() }
                         }
                         .padding(.horizontal)
                     }
@@ -71,8 +70,8 @@ struct ChatMotoristaView: View {
                                 .font(.caption)
                                 .padding(.vertical, 6)
                                 .padding(.horizontal, 12)
-                                .background(Color(hex: "#F5627B").opacity(0.15))
-                                .foregroundColor(Color(hex: "#6A0030"))
+                                .background(Color("btn color").opacity(0.15))
+                                .foregroundColor(Color("card and navbar"))
                                 .cornerRadius(16)
                         }
                     }
@@ -81,7 +80,6 @@ struct ChatMotoristaView: View {
                 .padding(.vertical, 6)
             }
 
-         
             HStack {
                 TextField("Digite uma mensagem...", text: $mensagem)
                     .padding(10)
@@ -90,7 +88,7 @@ struct ChatMotoristaView: View {
 
                 Button(action: enviarMensagem) {
                     Image(systemName: "paperplane.fill")
-                        .foregroundColor(Color(hex: "#6A0030"))
+                        .foregroundColor(Color("card and navbar"))
                         .padding(.horizontal, 6)
                 }
             }
@@ -125,4 +123,3 @@ struct MensagemChat: Identifiable {
         )
     )
 }
-
