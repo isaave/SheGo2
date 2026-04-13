@@ -162,3 +162,4 @@ struct TelaCorridaView: View {
 #Preview {
     TelaCorridaView()
 }
+
