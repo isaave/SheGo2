@@ -112,6 +112,17 @@ struct MensagemChat: Identifiable {
 }
 
 #Preview {
-    ChatMotoristaView(motorista: Motorista(nome: "Helena Maria", preco: "R$20,00", avaliacao: 5, foto: "helena maria"))
+    ChatMotoristaView(
+        motorista: Motorista(
+            nome: "Helena Maria",
+            preco: "R$20,00",
+            avaliacao: 5,
+            foto: "helena maria",
+            modelo: "Hyundai HB20",
+            cor: "Prata",
+            placa: "BRA2E19",
+            descricao: "Motorista parceira há quase 4 anos e especialista em rotas urbanas."
+        )
+    )
 }
 
