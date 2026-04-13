@@ -31,7 +31,7 @@ struct BuscandoMotoristaView: View {
                     .navigationBarBackButtonHidden(true)
             }
             
-            // ⏱️ tempo
+      
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     irParaProxima = true

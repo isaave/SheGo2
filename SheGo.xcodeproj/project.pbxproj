@@ -59,6 +59,7 @@
 				HomepageView.swift,
 				LoginView.swift,
 				PedirCorridaView.swift,
+				ResumoConfirmacaoView.swift,
 			);
 			target = 7671845A2F7EEBF6005B995B /* SheGo */;
 		};
@@ -76,6 +77,7 @@
 				HomepageView.swift,
 				LoginView.swift,
 				PedirCorridaView.swift,
+				ResumoConfirmacaoView.swift,
 			);
 			target = 767184712F7EEBF7005B995B /* SheGoUITests */;
 		};
