@@ -40,16 +40,6 @@ struct EscolhaMotorista: View {
     
     let motoristas: [Motorista] = [
         Motorista(
-            nome: "Helena Maria",
-            preco: "R$20,00",
-            avaliacao: 5,
-            foto: "helena maria",
-            modelo: "Hyundai HB20",
-            cor: "Prata",
-            placa: "BRA2E19",
-            descricao: "Motorista parceira há quase 4 anos e especialista em rotas urbanas. Priorizo sempre o conforto e a tranquilidade das minhas passageiras."
-        ),
-        Motorista(
             nome: "Fernanda Almeida",
             preco: "R$18,00",
             avaliacao: 4,
@@ -57,7 +47,7 @@ struct EscolhaMotorista: View {
             modelo: "Fiat Argo",
             cor: "Branco",
             placa: "QWE4F56",
-            descricao: "Motorista cuidadosa, pontual e com foco em corridas seguras e tranquilas, principalmente para trajetos do dia a dia."
+            descricao: "Motorista cuidadosa, pontual e com foco em corridas seguras e tranquilas."
         ),
         Motorista(
             nome: "Marcela Ramos",
@@ -67,7 +57,7 @@ struct EscolhaMotorista: View {
             modelo: "Chevrolet Onix",
             cor: "Vermelho",
             placa: "ABC1D23",
-            descricao: "Tenho experiência com corridas urbanas e busco oferecer uma viagem confortável e acolhedora para cada passageira."
+            descricao: "Experiência com corridas urbanas e viagens confortáveis."
         ),
         Motorista(
             nome: "Rita de Cássia",
@@ -77,7 +67,7 @@ struct EscolhaMotorista: View {
             modelo: "Renault Kwid",
             cor: "Cinza",
             placa: "XYZ9K88",
-            descricao: "Atendimento simpático e responsável, sempre priorizando segurança, clareza no trajeto e uma boa experiência."
+            descricao: "Atendimento simpático e responsável."
         )
     ]
     
@@ -94,30 +84,25 @@ struct EscolhaMotorista: View {
                         Button {
                             dismiss()
                         } label: {
-                            ZStack {
-                                Circle()
-                                    .fill(Color(hex: "#A00049"))
-                                    .frame(width: 42, height: 42)
-                                
-                                Image(systemName: "chevron.left")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 18, weight: .bold))
-                            }
+                            Circle()
+                                .fill(Color(hex: "#A00049"))
+                                .frame(width: 42, height: 42)
+                                .overlay(
+                                    Image(systemName: "chevron.left")
+                                        .foregroundColor(.white)
+                                )
                         }
-                        
                         Spacer()
                     }
                     
                     Text("Sarah Freitas")
-                        .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.white)
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 8)
+                        .padding(8)
                         .background(Color(hex: "#F5627B"))
                         .cornerRadius(10)
                 }
-                .padding(.horizontal, 20)
                 .padding(.top, 60)
+                .padding(.horizontal)
                 
                 Spacer()
             }
@@ -125,212 +110,38 @@ struct EscolhaMotorista: View {
             VStack {
                 Spacer()
                 
-                VStack(spacing: 14) {
+                VStack(spacing: 12) {
                     
-                    Capsule()
-                        .fill(Color.white.opacity(0.9))
-                        .frame(width: 70, height: 4)
-                        .padding(.top, 8)
-                    
-                    VStack(spacing: 8) {
-                        routeRow("Senac Santo Amaro")
-                        routeRow("Roldão Atacadista")
-                    }
-                    .padding(.horizontal, 14)
-                    
-                    if let motorista = selectedMotorista {
-                        VStack(spacing: 12) {
-                            motoristaDetalhado(motorista)
-                            
-                            ScrollView(showsIndicators: false) {
-                                VStack(spacing: 12) {
-                                    ForEach(motoristas.filter { $0.id != motorista.id }) { item in
-                                        motoristaCard(item)
-                                            .blur(radius: 2)
-                                            .opacity(0.25)
-                                    }
-                                }
-                                .padding(.horizontal, 14)
-                                .padding(.bottom, 4)
-                            }
-                            .frame(height: 160)
+                    ForEach(motoristas) { motorista in
+                        HStack {
+                            Text(motorista.nome)
+                            Spacer()
+                            Text(motorista.preco)
                         }
-                    } else {
-                        ScrollView(showsIndicators: false) {
-                            VStack(spacing: 12) {
-                                ForEach(motoristas) { motorista in
-                                    motoristaCard(motorista)
-                                }
-                            }
-                            .padding(.horizontal, 14)
-                            .padding(.bottom, 4)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .onTapGesture {
+                            selectedMotorista = motorista
                         }
-                        .frame(height: 340)
                     }
                     
-                    Button(action: {
-                    }) {
+                    Button {
+                    } label: {
                         Text("Escolher Motorista")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 52)
-                            .background(selectedMotorista != nil ? Color(hex: "#F5627B") : Color.gray.opacity(0.5))
+                            .padding()
+                            .background(selectedMotorista != nil ? Color.pink : Color.gray)
+                            .foregroundColor(.white)
                             .cornerRadius(12)
                     }
                     .disabled(selectedMotorista == nil)
-                    .padding(.horizontal, 14)
-                    .padding(.bottom, 16)
                 }
+                .padding()
                 .background(Color(hex: "#A00049"))
-                .clipShape(RoundedRectangle(cornerRadius: 24))
+                .cornerRadius(20)
             }
         }
-        .navigationBarBackButtonHidden(true)
-    }
-    
-    func routeRow(_ text: String) -> some View {
-        HStack(spacing: 10) {
-            VStack(spacing: 2) {
-                Circle()
-                    .fill(Color.white)
-                    .frame(width: 5, height: 5)
-                
-                Rectangle()
-                    .fill(Color.white)
-                    .frame(width: 1.5, height: 16)
-                
-                Circle()
-                    .fill(Color.white)
-                    .frame(width: 5, height: 5)
-            }
-            
-            Text(text)
-                .foregroundColor(.white)
-                .font(.system(size: 16, weight: .medium))
-            
-            Spacer()
-        }
-        .padding(.horizontal, 14)
-        .frame(height: 42)
-        .background(Color(hex: "#7E0039"))
-        .cornerRadius(12)
-    }
-    
-    func motoristaCard(_ motorista: Motorista) -> some View {
-        HStack(spacing: 12) {
-            Image(motorista.foto)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 54, height: 54)
-                .clipShape(Circle())
-            
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(spacing: 4) {
-                    Text(motorista.nome)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.black)
-                    
-                    Image(systemName: "checkmark.seal")
-                        .font(.system(size: 12))
-                        .foregroundColor(.black.opacity(0.8))
-                }
-                
-                Text("Ver mais")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 5)
-                    .background(Color(hex: "#F5627B"))
-                    .cornerRadius(8)
-            }
-            
-            Spacer()
-            
-            VStack(alignment: .trailing, spacing: 10) {
-                HStack(spacing: 2) {
-                    ForEach(0..<5, id: \.self) { index in
-                        Image(systemName: index < motorista.avaliacao ? "star.fill" : "star")
-                            .font(.system(size: 11))
-                            .foregroundColor(Color(hex: "#FF2C74"))
-                    }
-                }
-                
-                Text(motorista.preco)
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(Color(hex: "#A00049"))
-            }
-        }
-        .padding(14)
-        .background(Color(hex: "#F7ECEC"))
-        .cornerRadius(16)
-        .onTapGesture {
-            selectedMotorista = motorista
-        }
-    }
-    
-    func motoristaDetalhado(_ motorista: Motorista) -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .top) {
-                Image(motorista.foto)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 54, height: 54)
-                    .clipShape(Circle())
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(motorista.nome)
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.black)
-                }
-                
-                Spacer()
-                
-                HStack(spacing: 2) {
-                    ForEach(0..<5, id: \.self) { index in
-                        Image(systemName: index < motorista.avaliacao ? "star.fill" : "star")
-                            .font(.system(size: 12))
-                            .foregroundColor(Color(hex: "#FF2C74"))
-                    }
-                }
-            }
-            
-            HStack(alignment: .top, spacing: 12) {
-                Image("carro motorista")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 60)
-                
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Modelo: \(motorista.modelo)")
-                    Text("Cor: \(motorista.cor)")
-                    Text("Placa: \(motorista.placa)")
-                }
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.black)
-            }
-            
-            Rectangle()
-                .fill(Color(hex: "#F2B0B8"))
-                .frame(height: 1)
-            
-            Text(motorista.descricao)
-                .font(.system(size: 13))
-                .foregroundColor(.black)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            HStack {
-                Spacer()
-                
-                Text(motorista.preco)
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(Color(hex: "#A00049"))
-            }
-        }
-        .padding(16)
-        .background(Color(hex: "#F7ECEC"))
-        .cornerRadius(18)
-        .padding(.horizontal, 14)
     }
 }
 
