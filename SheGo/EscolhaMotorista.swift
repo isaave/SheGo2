@@ -169,17 +169,28 @@ struct EscolhaMotorista: View {
                         .frame(height: 390)
                     }
                     
-                    Button {
-                    } label: {
+                    NavigationLink(
+                        destination: {
+                            if let motorista = selectedMotorista {
+                                PedirCorridaView(motorista: motorista)
+                            }
+                        }
+                    ) {
                         Text("Escolher Motorista")
                             .font(.system(size: 18, weight: .bold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
-                            .background(selectedMotorista != nil ? Color(hex: "#F5627B") : Color.white.opacity(0.5))
+                            .background(
+                                selectedMotorista != nil
+                                ? Color(hex: "#F5627B")
+                                : Color.white.opacity(0.5)
+                            )
                             .cornerRadius(12)
                     }
                     .disabled(selectedMotorista == nil)
+                    .padding(.horizontal, 12)
+                    .padding(.bottom, 5)
                     .padding(.horizontal, 12)
                     .padding(.bottom, 5)
                 }
@@ -304,7 +315,7 @@ struct EscolhaMotorista: View {
             }
             
             HStack(alignment: .top, spacing: 12) {
-                Image("carro motorista")
+                Image("carro")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 60)

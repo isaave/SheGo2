@@ -2,127 +2,177 @@ import SwiftUI
 import MapKit
 
 struct PedirCorridaView: View {
-
-    @State private var showCard = false
+    
     let motorista: Motorista
-
+    
     @State private var camera = MapCameraPosition.region(
         MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: -23.5505, longitude: -46.6333),
+            center: CLLocationCoordinate2D(latitude: -23.6336, longitude: -46.6992),
             span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         )
     )
-
-    var body: some View {
-        ZStack(alignment: .bottom) {
-
     
+    var body: some View {
+        ZStack {
+            
             Map(position: $camera)
                 .ignoresSafeArea()
-
-            LinearGradient(
-                gradient: Gradient(colors: [Color.black.opacity(0.25), Color(hex: "#6A0030").opacity(0.75)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-
-            VStack(spacing: 20) {
-                Spacer()
-
             
+            VStack {
+                Spacer()
+                
                 VStack(spacing: 14) {
-
                     
-                    VStack(spacing: 12) {
-                        HStack {
+                    Capsule()
+                        .fill(Color.white)
+                        .frame(width: 90, height: 4)
+                        .padding(.top, 8)
+                    
+                    Text("Resumo da corrida")
+                        .font(.custom("Karla-Bold", size: 22))
+                        .foregroundColor(.white)
+                    
+                    VStack(alignment: .leading, spacing: 14) {
+                        
+                        HStack(alignment: .top) {
                             Image(motorista.foto)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 60, height: 60)
+                                .frame(width: 56, height: 56)
                                 .clipShape(Circle())
-
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(motorista.nome)
-                                    .font(.headline)
-
-                                HStack {
-                                    ForEach(0..<motorista.avaliacao, id: \.self) { _ in
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(Color(hex: "#F5627B"))
-                                    }
+                            
+                            Text(motorista.nome)
+                                .font(.custom("Karla-Bold", size: 18))
+                                .foregroundColor(.black)
+                                .padding(.top, 6)
+                            
+                            Spacer()
+                            
+                            HStack(spacing: 2) {
+                                ForEach(0..<5, id: \.self) { index in
+                                    Image(systemName: index < motorista.avaliacao ? "star.fill" : "star")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(Color("btn color"))
                                 }
                             }
-
-                            Spacer()
-
-                            Text(motorista.preco)
-                                .font(.title3)
-                                .bold()
-                                .foregroundColor(Color(hex: "#F5627B"))
+                            .padding(.top, 8)
                         }
-
-                        Divider().background(Color(hex: "#F5627B"))
-
-                        HStack(spacing: 16) {
+                        
+                        HStack(alignment: .center, spacing: 14) {
                             Image("carro")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 200)
-
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("Modelo: Hyundai HB20")
-                                Text("Cor: Prata")
-                                Text("Placa: BRA2E19")
+                                .frame(width: 115, height: 72)
+                            
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(motorista.modelo)
+                                Text(motorista.cor)
+                                Text(motorista.placa)
+                                Text("1,4 Km")
                             }
-                            .font(.subheadline)
+                            .font(.custom("Karla-Regular", size: 16))
+                            .foregroundColor(.black)
                         }
-
-                        Text("Motorista parceira há quase 4 anos e especialista em rotas urbanas. Priorizo sempre o conforto e a tranquilidade das minhas passageiras.")
-                            .font(.footnote)
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.leading)
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            
+                            HStack(alignment: .top, spacing: 10) {
+                                VStack(spacing: 2) {
+                                    Circle()
+                                        .fill(Color("card and navbar color"))
+                                        .frame(width: 5, height: 5)
+                                    
+                                    Rectangle()
+                                        .fill(Color("card and navbar color"))
+                                        .frame(width: 1.5, height: 28)
+                                    
+                                    Circle()
+                                        .fill(Color("card and navbar color "))
+                                        .frame(width: 5, height: 5)
+                                }
+                                .padding(.top, 6)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Seu local:")
+                                        .font(.custom("Karla-Bold", size: 15))
+                                        .foregroundColor(.black)
+                                    
+                                    Text("Senac Santo Amaro, Av. Eng. Eusébio Stevaux, 823\nSanto Amaro, São Paulo - SP, 04696-000")
+                                        .font(.custom("Karla-Regular", size: 14))
+                                        .foregroundColor(.black.opacity(0.85))
+                                }
+                            }
+                            
+                            HStack(alignment: .top, spacing: 10) {
+                                Color.clear
+                                    .frame(width: 5, height: 5)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Destino:")
+                                        .font(.custom("Karla-Bold", size: 15))
+                                        .foregroundColor(.black)
+                                    
+                                    Text("Roldão Atacadista, Av. das Nações Unidas, 22063\nCampo Grande, São Paulo - SP, 04795-100")
+                                        .font(.custom("Karla-Regular", size: 14))
+                                        .foregroundColor(.black.opacity(0.85))
+                                }
+                            }
+                            .padding(.leading, 15)
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            
+                            Text("Valor da Corrida: \(motorista.preco)")
+                                .font(.custom("Karla-Bold", size: 18))
+                                .foregroundColor(Color("card and navbar color"))
+                            
+                            Spacer()
+                        }
+                        .padding(.top, 2)
                     }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(16)
-
-                    Button(action: {}) {
-                        Text("Confirmar Corrida")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(hex: "#F5627B"))
+                    .padding(16)
+                    .background(Color("Cor Label"))
+                    .cornerRadius(18)
+                    .padding(.horizontal, 14)
+                    
+                    Button {
+                        print("Corrida pedida")
+                    } label: {
+                        Text("Pedir Corrida")
+                            .font(.custom("Karla-Bold", size: 18))
                             .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 52)
+                            .background(Color("btn color"))
                             .cornerRadius(12)
                     }
+                    .padding(.horizontal, 14)
+                    .padding(.bottom, 18)
                 }
-                .padding()
-                .background(.ultraThinMaterial)
-                .cornerRadius(18)
-                .shadow(color: Color.black.opacity(0.25), radius: 12, x: 0, y: 8)
-                .opacity(showCard ? 1 : 0)
-                .offset(y: showCard ? 0 : 30)
-                .animation(.easeOut(duration: 0.35), value: showCard)
-                .onAppear { showCard = true }
+                .frame(maxWidth: .infinity)
+                .background(Color("card and navbar color"))
+                .cornerRadius(25)
+                .ignoresSafeArea(edges: .bottom)
             }
-            .padding(.bottom, 20)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    PedirCorridaView(
-        motorista: Motorista(
-            nome: "Helena Maria",
-            preco: "R$20,00",
-            avaliacao: 5,
-            foto: "helena maria",
-            modelo: "Hyundai HB20",
-            cor: "Prata",
-            placa: "BRA2E19",
-            descricao: "Motorista parceira há quase 4 anos e especialista em rotas urbanas."
+    NavigationStack {
+        PedirCorridaView(
+            motorista: Motorista(
+                nome: "Helena Maria",
+                preco: "R$20,00",
+                avaliacao: 5,
+                foto: "helena maria",
+                modelo: "Hyundai HB20",
+                cor: "Prata",
+                placa: "BRA2E19",
+                descricao: "Motorista parceira há quase 4 anos e especialista em rotas urbanas."
+            )
         )
-    )
+    }
 }
-
