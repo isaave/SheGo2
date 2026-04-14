@@ -158,7 +158,7 @@ struct PedirCorridaView: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-}
+} //
 
 #Preview {
     NavigationStack {
