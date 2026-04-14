@@ -4,6 +4,9 @@ import MapKit
 struct PedirCorridaView: View {
     
     let motorista: Motorista
+    @State private var formaPagamento: String = "Pix"
+    
+    @Environment(\.dismiss) var dismiss
     
     @State private var camera = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -18,6 +21,29 @@ struct PedirCorridaView: View {
             Map(position: $camera)
                 .ignoresSafeArea()
             
+        
+            VStack {
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.black)
+                            .padding(12)
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 50)
+                
+                Spacer()
+            }
+            
             VStack {
                 Spacer()
                 
@@ -28,50 +54,20 @@ struct PedirCorridaView: View {
                         .frame(width: 90, height: 4)
                         .padding(.top, 8)
                     
-                    Text("Resumo da corrida")
+                    Text("Pagamento da corrida")
                         .font(.custom("Karla-Bold", size: 22))
                         .foregroundColor(Color("txt color"))
                     
-                    VStack(alignment: .leading, spacing: 14) {
+                    VStack(alignment: .leading, spacing: 16) {
                         
-                        HStack(alignment: .top) {
-                            Image(motorista.foto)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 56, height: 56)
-                                .clipShape(Circle())
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(motorista.preco)
+                                .font(.custom("Karla-Bold", size: 28))
+                                .foregroundColor(Color("card and navbar color"))
                             
-                            Text(motorista.nome)
-                                .font(.custom("Karla-Bold", size: 18))
+                            Text("1,4 Km")
+                                .font(.custom("Karla-Regular", size: 16))
                                 .foregroundColor(.black)
-                                .padding(.top, 6)
-                            
-                            Spacer()
-                            
-                            HStack(spacing: 2) {
-                                ForEach(0..<5, id: \.self) { index in
-                                    Image(systemName: index < motorista.avaliacao ? "star.fill" : "star")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(Color("btn color"))
-                                }
-                            }
-                            .padding(.top, 8)
-                        }
-                        
-                        HStack(alignment: .center, spacing: 14) {
-                            Image("carro")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 115, height: 72)
-                            
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text(motorista.modelo)
-                                Text(motorista.cor)
-                                Text(motorista.placa)
-                                Text("1,4 Km")
-                            }
-                            .font(.custom("Karla-Regular", size: 16))
-                            .foregroundColor(.black)
                         }
                         
                         VStack(alignment: .leading, spacing: 10) {
@@ -117,31 +113,38 @@ struct PedirCorridaView: View {
                                         .foregroundColor(.black.opacity(0.85))
                                 }
                             }
-                            .padding(.leading, 15)
+                            .padding(.leading, 19)
                         }
                         
-                        HStack {
-                            Spacer()
+                        VStack(spacing: 10) {
+                            pagamentoRow(
+                                titulo: "Pix",
+                                icone: "diamond",
+                                selecionado: formaPagamento == "Pix"
+                            ) {
+                                formaPagamento = "Pix"
+                            }
                             
-                            Text("Valor da Corrida: \(motorista.preco)")
-                                .font(.custom("Karla-Bold", size: 18))
-                                .foregroundColor(Color("card and navbar color"))
-                            
-                            Spacer()
+                            pagamentoRow(
+                                titulo: "Cartão",
+                                icone: "creditcard",
+                                selecionado: formaPagamento == "Cartão"
+                            ) {
+                                formaPagamento = "Cartão"
+                            }
                         }
-                        .padding(.top, 2)
                     }
                     .padding(16)
                     .background(Color("Cor Label"))
                     .cornerRadius(18)
                     .padding(.horizontal, 14)
                     
-                    NavigationLink(destination: ResumoConfirmacaoView(motorista: motorista)){
-                        Text("Pedir Corrida")
+                    NavigationLink(destination: TelaCorridaView()) {
+                        Text("Confirmar pagamento")
                             .font(.custom("Karla-Bold", size: 18))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 50)
+                            .frame(height: 52)
                             .background(Color("btn color"))
                             .cornerRadius(12)
                     }
@@ -153,7 +156,7 @@ struct PedirCorridaView: View {
                 .background(Color("card and navbar color"))
                 .cornerRadius(25)
                 .padding(.top, 345)
-                .ignoresSafeArea(edges: .vertical)
+                .ignoresSafeArea(edges: .bottom)
             }
         }
         .navigationBarBackButtonHidden(true)

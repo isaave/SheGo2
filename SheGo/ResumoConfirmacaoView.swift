@@ -6,6 +6,8 @@ struct ResumoConfirmacaoView: View {
     let motorista: Motorista
     @State private var formaPagamento: String = "Pix"
     
+    @Environment(\.dismiss) var dismiss
+    
     @State private var camera = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: -23.6336, longitude: -46.6992),
@@ -18,6 +20,28 @@ struct ResumoConfirmacaoView: View {
             
             Map(position: $camera)
                 .ignoresSafeArea()
+            
+            VStack {
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.black)
+                            .padding(12)
+                            .background(Color(red: 0.90, green: 0.80, blue: 0.69)) // 👈 cor bege
+                            .clipShape(Circle())
+                            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 50)
+                
+                Spacer()
+            }
             
             VStack {
                 Spacer()
@@ -179,7 +203,7 @@ struct ResumoConfirmacaoView: View {
 
 #Preview {
     NavigationStack {
-        ResumoConfirmacaoView(
+        PedirCorridaView(
             motorista: Motorista(
                 nome: "Helena Maria",
                 preco: "R$20,00",
@@ -193,4 +217,3 @@ struct ResumoConfirmacaoView: View {
         )
     }
 }
-

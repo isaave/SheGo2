@@ -18,6 +18,8 @@ extension Color {
         let scanner = Scanner(string: hex)
         _ = scanner.scanString("#")
         var rgb: UInt64 = 0
+        
+        
         scanner.scanHexInt64(&rgb)
         let r = Double((rgb >> 16) & 0xFF) / 255.0
         let g = Double((rgb >> 8) & 0xFF) / 255.0
@@ -110,6 +112,19 @@ struct EscolhaMotorista: View {
             
             Map(position: $camera)
                 .ignoresSafeArea()
+            Button {
+                   dismiss()
+               } label: {
+                   Image(systemName: "chevron.left")
+                       .font(.system(size: 18, weight: .bold))
+                       .foregroundColor(.black)
+                       .frame(width: 40, height: 40)
+                       .background(Color.white)
+                       .clipShape(Circle())
+                       .shadow(radius: 3)
+               }
+               .padding(.top, 50)
+               .padding(.leading, 16)
             
             if selectedMotorista != nil {
                 Color.black.opacity(0.001)
