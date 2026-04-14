@@ -6,7 +6,7 @@ struct AvaliarCorridaView: View {
     
     var body: some View {
         ZStack {
-            Color(#colorLiteral(red: 0.89, green: 0.76, blue: 0.64, alpha: 1))
+            Color("background color")
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
