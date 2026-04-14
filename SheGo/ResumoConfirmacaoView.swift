@@ -28,7 +28,7 @@ struct ResumoConfirmacaoView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                     
-                    // 🔥 AQUI ESTAVA FALTANDO ESSE VSTACK
+                   
                     VStack(alignment: .leading, spacing: 12) {
                         
                         Text("R$20,00")
@@ -125,3 +125,4 @@ struct ResumoConfirmacaoView: View {
 #Preview {
     ResumoConfirmacaoView()
 }
+

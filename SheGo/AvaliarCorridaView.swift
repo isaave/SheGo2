@@ -1,61 +1,56 @@
 import SwiftUI
 
 struct AvaliarCorridaView: View {
-
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         ZStack {
-            
-           
-            Color(red: 244/255, green: 220/255, blue: 199/255)
+            Color(#colorLiteral(red: 0.89, green: 0.76, blue: 0.64, alpha: 1))
                 .ignoresSafeArea()
-
-            VStack(spacing: 24) {
-
+            
+            VStack(spacing: 20) {
+                
                 Spacer()
-
                 
                 Image("pinguim")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 150)
-
-          
+                
                 Text("Sua corrida foi finalizada?")
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .foregroundColor(Color(red: 139/255, green: 0, blue: 54/255))
-
+                    .foregroundColor(Color(#colorLiteral(red: 0.65, green: 0.0, blue: 0.25, alpha: 1)))
+                
                 VStack(spacing: 12) {
-                    
-                    Button {
-                        print("Sim")
-                    } label: {
+
+                    NavigationLink(destination: HomepageView()) {
                         Text("Sim")
                             .foregroundColor(.white)
-                            .frame(width: 160)
-                            .padding()
-                            .background(Color(red: 245/255, green: 98/255, blue: 123/255))
-                            .cornerRadius(12)
+                            .frame(width: 150, height: 45)
+                            .background(Color(#colorLiteral(red: 0.94, green: 0.36, blue: 0.45, alpha: 1)))
+                            .cornerRadius(10)
                     }
-
-                    Button {
-                        print("Não")
-                    } label: {
+                    
+                   
+                    NavigationLink(destination: TelaCorridaView()) {
                         Text("Não")
                             .foregroundColor(.white)
-                            .frame(width: 160)
-                            .padding()
-                            .background(Color(red: 245/255, green: 98/255, blue: 123/255))
-                            .cornerRadius(12)
+                            .frame(width: 150, height: 45)
+                            .background(Color(#colorLiteral(red: 0.94, green: 0.36, blue: 0.45, alpha: 1)))
+                            .cornerRadius(10)
                     }
                 }
-
+                
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
-
 #Preview {
-    AvaliarCorridaView()
+    NavigationStack {
+        AvaliarCorridaView()
+    }
 }

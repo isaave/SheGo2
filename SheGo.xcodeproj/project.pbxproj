@@ -48,6 +48,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				AvaliarCorridaView.swift,
 				BuscandoView.swift,
 				CadastroView.swift,
 				ChatMotoristaView.swift,
@@ -68,6 +69,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				AvaliarCorridaView.swift,
 				BuscandoView.swift,
 				CadastroView.swift,
 				ChatMotoristaView.swift,
