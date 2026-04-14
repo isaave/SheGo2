@@ -24,13 +24,13 @@ struct PedirCorridaView: View {
                 VStack(spacing: 14) {
                     
                     Capsule()
-                        .fill(Color.white)
+                        .fill(Color("txt color"))
                         .frame(width: 90, height: 4)
                         .padding(.top, 8)
                     
                     Text("Resumo da corrida")
                         .font(.custom("Karla-Bold", size: 22))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("txt color"))
                     
                     VStack(alignment: .leading, spacing: 14) {
                         
@@ -76,7 +76,7 @@ struct PedirCorridaView: View {
                         
                         VStack(alignment: .leading, spacing: 10) {
                             
-                            HStack(alignment: .top, spacing: 10) {
+                            HStack(alignment: .top, spacing: 14) {
                                 VStack(spacing: 2) {
                                     Circle()
                                         .fill(Color("card and navbar color"))
@@ -87,7 +87,7 @@ struct PedirCorridaView: View {
                                         .frame(width: 1.5, height: 28)
                                     
                                     Circle()
-                                        .fill(Color("card and navbar color "))
+                                        .fill(Color("card and navbar color"))
                                         .frame(width: 5, height: 5)
                                 }
                                 .padding(.top, 6)
@@ -136,24 +136,24 @@ struct PedirCorridaView: View {
                     .cornerRadius(18)
                     .padding(.horizontal, 14)
                     
-                    Button {
-                        print("Corrida pedida")
-                    } label: {
+                    NavigationLink(destination: ResumoConfirmacaoView(motorista: motorista)){
                         Text("Pedir Corrida")
                             .font(.custom("Karla-Bold", size: 18))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 52)
+                            .frame(height: 50)
                             .background(Color("btn color"))
                             .cornerRadius(12)
                     }
+                    .buttonStyle(.plain)
                     .padding(.horizontal, 14)
-                    .padding(.bottom, 18)
+                    .padding(.bottom, 80)
                 }
                 .frame(maxWidth: .infinity)
                 .background(Color("card and navbar color"))
                 .cornerRadius(25)
-                .ignoresSafeArea(edges: .bottom)
+                .padding(.top, 345)
+                .ignoresSafeArea(edges: .vertical)
             }
         }
         .navigationBarBackButtonHidden(true)

@@ -3,11 +3,12 @@ import MapKit
 
 struct ResumoConfirmacaoView: View {
     
-    @State private var selectedPagamento: String = "Pix"
+    let motorista: Motorista
+    @State private var formaPagamento: String = "Pix"
     
-    @State private var cameraPosition = MapCameraPosition.region(
+    @State private var camera = MapCameraPosition.region(
         MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: -23.631, longitude: -46.713),
+            center: CLLocationCoordinate2D(latitude: -23.6336, longitude: -46.6992),
             span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         )
     )
@@ -15,113 +16,180 @@ struct ResumoConfirmacaoView: View {
     var body: some View {
         ZStack {
             
-            Map(position: $cameraPosition)
+            Map(position: $camera)
                 .ignoresSafeArea()
             
             VStack {
                 Spacer()
                 
-                VStack(spacing: 16) {
+                VStack(spacing: 14) {
+                    
+                    Capsule()
+                        .fill(Color("txt color"))
+                        .frame(width: 90, height: 4)
+                        .padding(.top, 8)
                     
                     Text("Pagamento da corrida")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
+                        .font(.custom("Karla-Bold", size: 22))
+                        .foregroundColor(Color("txt color"))
                     
-                    // 🔥 AQUI ESTAVA FALTANDO ESSE VSTACK
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 16) {
                         
-                        Text("R$20,00")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(hex: "#A00049"))
-                        
-                        Text("1,4 Km")
-                            .foregroundColor(.gray)
-                        
-                        Divider()
-                        
-                        VStack(alignment: .leading) {
-                            Text("Seu local:")
-                                .fontWeight(.semibold)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(motorista.preco)
+                                .font(.custom("Karla-Bold", size: 28))
+                                .foregroundColor(Color("card and navbar color"))
                             
-                            Text("Senac Santo Amaro...")
-                                .font(.caption)
-                                .foregroundColor(.gray)
+                            Text("1,4 Km")
+                                .font(.custom("Karla-Regular", size: 16))
+                                .foregroundColor(.black)
                         }
                         
-                        VStack(alignment: .leading) {
-                            Text("Destino:")
-                                .fontWeight(.semibold)
+                        VStack(alignment: .leading, spacing: 10) {
                             
-                            Text("Roldão Atacadista...")
-                                .font(.caption)
-                                .foregroundColor(.gray)
+                            HStack(alignment: .top, spacing: 14) {
+                                VStack(spacing: 2) {
+                                    Circle()
+                                        .fill(Color("card and navbar color"))
+                                        .frame(width: 5, height: 5)
+                                    
+                                    Rectangle()
+                                        .fill(Color("card and navbar color"))
+                                        .frame(width: 1.5, height: 28)
+                                    
+                                    Circle()
+                                        .fill(Color("card and navbar color"))
+                                        .frame(width: 5, height: 5)
+                                }
+                                .padding(.top, 6)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Seu local:")
+                                        .font(.custom("Karla-Bold", size: 15))
+                                        .foregroundColor(.black)
+                                    
+                                    Text("Senac Santo Amaro, Av. Eng. Eusébio Stevaux, 823\nSanto Amaro, São Paulo - SP, 04696-000")
+                                        .font(.custom("Karla-Regular", size: 14))
+                                        .foregroundColor(.black.opacity(0.85))
+                                }
+                            }
+                            
+                            HStack(alignment: .top, spacing: 10) {
+                                Color.clear
+                                    .frame(width: 5, height: 5)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Destino:")
+                                        .font(.custom("Karla-Bold", size: 15))
+                                        .foregroundColor(.black)
+                                    
+                                    Text("Roldão Atacadista, Av. das Nações Unidas, 22063\nCampo Grande, São Paulo - SP, 04795-100")
+                                        .font(.custom("Karla-Regular", size: 14))
+                                        .foregroundColor(.black.opacity(0.85))
+                                }
+                            }
+                            .padding(.leading, 19)
                         }
                         
-                        Divider()
-                        
-                        pagamentoOption("Pix")
-                        pagamentoOption("Cartão")
-                        
-                        Button {
-                            print("Pagamento confirmado")
-                        } label: {
-                            Text("Confirmar pagamento")
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.pink)
-                                .cornerRadius(14)
+                        VStack(spacing: 10) {
+                            pagamentoRow(
+                                titulo: "Pix",
+                                icone: "diamond",
+                                selecionado: formaPagamento == "Pix"
+                            ) {
+                                formaPagamento = "Pix"
+                            }
+                            
+                            pagamentoRow(
+                                titulo: "Cartão",
+                                icone: "creditcard",
+                                selecionado: formaPagamento == "Cartão"
+                            ) {
+                                formaPagamento = "Cartão"
+                            }
                         }
-                        .padding(.top, 10)
                     }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(16)
+                    .padding(16)
+                    .background(Color("Cor Label"))
+                    .cornerRadius(18)
+                    .padding(.horizontal, 14)
+                    
+                    NavigationLink(destination: TelaCorridaView()) {
+                        Text("Confirmar pagamento")
+                            .font(.custom("Karla-Bold", size: 18))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 52)
+                            .background(Color("btn color"))
+                            .cornerRadius(12)
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 14)
+                    .padding(.bottom, 80)
                 }
-                .padding()
-                .background(
-                    LinearGradient(
-                        colors: [
-                            Color(hex: "#A00049"),
-                            Color(hex: "#D81B60")
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .cornerRadius(24)
-                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color("card and navbar color"))
+                .cornerRadius(25)
+                .padding(.top, 345)
+                .ignoresSafeArea(edges: .bottom)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
-    func pagamentoOption(_ titulo: String) -> some View {
-        HStack {
-            Text(titulo)
-                .foregroundColor(Color(hex: "#A00049"))
-            
-            Spacer()
-            
-            Circle()
-                .stroke(Color(hex: "#A00049"), lineWidth: 2)
-                .frame(width: 20, height: 20)
-                .overlay(
+    func pagamentoRow(
+        titulo: String,
+        icone: String,
+        selecionado: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack {
+                Image(systemName: icone)
+                    .font(.system(size: 20))
+                    .foregroundColor(Color("card and navbar color"))
+                    .frame(width: 24)
+                
+                Text(titulo)
+                    .font(.custom("Karla-Bold", size: 16))
+                    .foregroundColor(Color("card and navbar color"))
+                
+                Spacer()
+                
+                ZStack {
                     Circle()
-                        .fill(selectedPagamento == titulo ? Color(hex: "#A00049") : Color.clear)
-                        .frame(width: 10, height: 10)
-                )
+                        .stroke(Color("card and navbar color"), lineWidth: 2)
+                        .frame(width: 22, height: 22)
+                    
+                    if selecionado {
+                        Circle()
+                            .fill(Color("card and navbar color"))
+                            .frame(width: 10, height: 10)
+                    }
+                }
+            }
+            .padding(.horizontal, 14)
+            .frame(height: 48)
+            .background(Color.white.opacity(0.55))
+            .cornerRadius(10)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .onTapGesture {
-            selectedPagamento = titulo
-        }
+        .buttonStyle(.plain)
     }
 }
 
 #Preview {
-    ResumoConfirmacaoView()
+    NavigationStack {
+        ResumoConfirmacaoView(
+            motorista: Motorista(
+                nome: "Helena Maria",
+                preco: "R$20,00",
+                avaliacao: 5,
+                foto: "helena maria",
+                modelo: "Hyundai HB20",
+                cor: "Prata",
+                placa: "BRA2E19",
+                descricao: "Motorista parceira há quase 4 anos e especialista em rotas urbanas."
+            )
+        )
+    }
 }
