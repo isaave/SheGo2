@@ -3,6 +3,7 @@ import SwiftUI
 struct AvaliarCorridaView: View {
     
     @Environment(\.dismiss) var dismiss
+    let motorista: Motorista
     
     var body: some View {
         ZStack {
@@ -33,8 +34,7 @@ struct AvaliarCorridaView: View {
                             .cornerRadius(10)
                     }
                     
-                   
-                    NavigationLink(destination: TelaCorridaView()) {
+                    NavigationLink(destination: TelaCorridaView(motorista: motorista)) {
                         Text("Não")
                             .foregroundColor(.white)
                             .frame(width: 150, height: 45)
@@ -49,8 +49,20 @@ struct AvaliarCorridaView: View {
         .navigationBarBackButtonHidden(true)
     }
 }
+
 #Preview {
     NavigationStack {
-        AvaliarCorridaView()
+        AvaliarCorridaView(
+            motorista: Motorista(
+                nome: "Helena Maria",
+                preco: "R$20,00",
+                avaliacao: 5,
+                foto: "helena maria",
+                modelo: "Hyundai HB20",
+                cor: "Prata",
+                placa: "BRA2E19",
+                descricao: "Motorista parceira há quase 4 anos e especialista em rotas urbanas."
+            )
+        )
     }
 }
