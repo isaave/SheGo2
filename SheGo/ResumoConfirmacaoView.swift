@@ -114,7 +114,7 @@ struct ResumoConfirmacaoView: View {
                     .cornerRadius(18)
                     .padding(.horizontal, 14)
                     
-                    NavigationLink(destination: TelaCorridaView()) {
+                    NavigationLink(destination: TelaCorridaView(motorista: motorista)) {
                         Text("Confirmar pagamento")
                             .font(.custom("Karla-Bold", size: 18))
                             .foregroundColor(.white)
