@@ -42,10 +42,10 @@ struct EscolhaUsuarioView: View {
         HStack(spacing: 12) {
             
             Image(systemName: icone)
-                .font(.system(size: 35)) // 👈 ÍCONE MAIOR
+                .font(.system(size: 35))
             
             Text(texto)
-                .font(.system(size: 26, weight: .semibold)) // 👈 TEXTO MAIOR
+                .font(.system(size: 26, weight: .semibold))
         }
         .foregroundColor(Color("txt color"))
         .frame(width: 221, height: 68)

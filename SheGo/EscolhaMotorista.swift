@@ -113,19 +113,19 @@ struct EscolhaMotorista: View {
             Map(position: $camera)
                 .ignoresSafeArea()
             Button {
-                   dismiss()
-               } label: {
-                   Image(systemName: "chevron.left")
-                       .font(.system(size: 18, weight: .bold))
-                       .foregroundColor(.black)
-                       .frame(width: 40, height: 40)
-                       .background(Color.white)
-                       .clipShape(Circle())
-                       .shadow(radius: 3)
-               }
-               .padding(.top, 50)
-               .padding(.leading, 16)
-            
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.black)
+                    .frame(width: 40, height: 40)
+                    .background(Color.white)
+                    .clipShape(Circle())
+                    .shadow(radius: 3)
+            }
+            .padding(.leading, 16)
+            .padding(.top, 10)
+            .offset(y: -65)
             if selectedMotorista != nil {
                 Color.black.opacity(0.001)
                     .ignoresSafeArea()
