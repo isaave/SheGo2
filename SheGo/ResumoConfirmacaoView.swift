@@ -30,7 +30,7 @@ struct ResumoConfirmacaoView: View {
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.black)
                             .padding(12)
-                            .background(Color(red: 0.90, green: 0.80, blue: 0.69)) // 👈 cor bege
+                            .background(Color(red: 0.90, green: 0.80, blue: 0.69)) 
                             .clipShape(Circle())
                             .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
                     }
