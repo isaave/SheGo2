@@ -21,7 +21,6 @@ struct PedirCorridaView: View {
             Map(position: $camera)
                 .ignoresSafeArea()
             
-        
             VStack {
                 HStack {
                     Button(action: {
@@ -139,7 +138,7 @@ struct PedirCorridaView: View {
                     .cornerRadius(18)
                     .padding(.horizontal, 14)
                     
-                    NavigationLink(destination: TelaCorridaView()) {
+                    NavigationLink(destination: TelaCorridaView(motorista: motorista)) {
                         Text("Confirmar pagamento")
                             .font(.custom("Karla-Bold", size: 18))
                             .foregroundColor(.white)
@@ -161,7 +160,41 @@ struct PedirCorridaView: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-} //
+    
+    func pagamentoRow(
+        titulo: String,
+        icone: String,
+        selecionado: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack {
+                Image(systemName: icone)
+                    .foregroundColor(Color("card and navbar color"))
+                
+                Text(titulo)
+                    .font(.custom("Karla-Bold", size: 16))
+                    .foregroundColor(Color("card and navbar color"))
+                
+                Spacer()
+                
+                Circle()
+                    .stroke(Color("card and navbar color"), lineWidth: 2)
+                    .frame(width: 20, height: 20)
+                    .overlay(
+                        Circle()
+                            .fill(Color("card and navbar color"))
+                            .frame(width: 10, height: 10)
+                            .opacity(selecionado ? 1 : 0)
+                    )
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+        }
+        .buttonStyle(.plain)
+    }
+}
 
 #Preview {
     NavigationStack {
